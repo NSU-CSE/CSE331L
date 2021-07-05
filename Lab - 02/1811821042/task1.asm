@@ -4,20 +4,20 @@
 .CODE
 
 INPUT:
-    MOV AH, 1H ;Taking one single-key input 
-    INT 21H
-    MOV BL, AL
+    MOV AH, 1H ;AL = INPUT
+    INT 21H    ;INTERRUPT
+    MOV BL, AL ;BL = AL
 
 SPACE:
-    MOV AH, 2H 
-    MOV DL, 20H
-    INT 21H 
+    MOV AH, 2H ;OUTPUT
+    MOV DL, 20H;DISPLAY SPACE
+    INT 21H    ;INTERRUPT
 
 OUTPUT:
-    MOV AH, 2H
-    MOV DL, BL
-    INT 21H
+    MOV AH, 2H ;OUTPUT
+    MOV DL, BL ;BL = BL
+    INT 21H    ;INTERRUPT
 
 EXIT:
-    MOV AH, 4CH
-    INT 21H
+    MOV AH, 4CH ;CONTROL RETURNS TO OS
+    INT 21H     ;INTERRUPT
