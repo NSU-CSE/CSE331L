@@ -15,7 +15,7 @@ SPACE:
 
 OUTPUT:
     MOV AH, 2H ;OUTPUT
-    MOV DL, BL ;BL = BL
+    MOV DL, BL ;DL = BL
     INT 21H    ;INTERRUPT
 
 EXIT:
