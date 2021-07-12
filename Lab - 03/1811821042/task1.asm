@@ -1,109 +1,45 @@
 .MODEL SMALL
 .STACK 100H
 .DATA
-    ARRAY1 DB 5 DUP(?)
-    ARRAY2 DB 5 DUP(?)  
-    STRING1 DB "ENTER ARRAY 1: $" 
-    STRING2 DB 0AH, 0DH, "ARRAY 2: $"
+    ARRAY1 DB 1, 3, 6, 7, 9
+    ARRAY2 DB 5 DUP(?) 
+    CONVERT DB 30H
     
 .CODE 
-    TRANSFER:
+    TRANSFER_TO_DS:
         MOV DX, @DATA
         MOV DS, DX
         
-        LEA DX, STRING1
-        MOV AH, 9H
-        INT 21H
-        
         MOV SI, 0 
         
-    INPUT1:
-        MOV AH, 1H 
-        INT 21H 
-        MOV ARRAY1[SI], AL 
+    INDEX_0:
+        MOV AL, ARRAY1[SI] 
+        ADD AL, CONVERT
+        MOV ARRAY2[SI], AL   
+        
+    INDEX_1:
+        INC SI
+        MOV AH, ARRAY1[SI] 
+        ADD AH, CONVERT
+        MOV ARRAY2[SI], AH   
+        
+    INDEX_2:
+        INC SI
         MOV BL, ARRAY1[SI]
+        ADD BL, CONVERT
         MOV ARRAY2[SI], BL 
-         
         
-    INPUT2:
+    INDEX_3:
         INC SI
-        MOV AH, 1H 
-        INT 21H 
-        MOV ARRAY1[SI], AL 
         MOV BH, ARRAY1[SI]
-        MOV ARRAY2[SI], BH 
-         
+        ADD BH, CONVERT
+        MOV ARRAY2[SI], BH         
         
-    INPUT3:
+    INDEX_4: 
         INC SI
-        MOV AH, 1H 
-        INT 21H 
-        MOV ARRAY1[SI], AL 
-        MOV CL, ARRAY1[SI]
-        MOV ARRAY2[SI], CL
-        
-        
-    INPUT4:
-        INC SI
-        MOV AH, 1H 
-        INT 21H 
-        MOV ARRAY1[SI], AL 
-        MOV CH, ARRAY1[SI]
-        MOV ARRAY2[SI], CH
-         
-        
-    INPUT5:
-        INC SI
-        MOV AH, 1H 
-        INT 21H 
-        MOV ARRAY1[SI], AL 
-        MOV DH, ARRAY1[SI]
-        MOV ARRAY2[SI], DH 
-        
-    NEWLINE:
-        MOV AH, 2H
-        MOV DL, 0AH
-        INT 21H
-        MOV AH, 2H
-        MOV DL, 0DH
-        INT 21H
-        
-        
-        LEA DX, STRING2
-        MOV AH, 9H
-        INT 21H
-        
-        MOV DI, 0 
-        
-    OUTPUT1:
-        MOV AH, 2H
-        MOV DL, ARRAY2[DI]
-        INT 21H
-        
-    OUTPUT2:
-        INC DI
-        MOV AH, 2H
-        MOV DL, ARRAY2[DI]
-        INT 21H 
-         
-    OUTPUT3:
-        INC DI
-        MOV AH, 2H
-        MOV DL, ARRAY2[DI]
-        INT 21H
-         
-    OUTPUT4:
-        INC DI
-        MOV AH, 2H
-        MOV DL, ARRAY2[DI]
-        INT 21H
-         
-    OUTPUT5:
-        INC DI
-        MOV AH, 2H
-        MOV DL, ARRAY2[DI]
-        INT 21H
-        
+        MOV CL, ARRAY1[SI] 
+        ADD CL, CONVERT
+        MOV ARRAY2[SI], CL 
     
     EXIT:
         MOV AH, 4CH

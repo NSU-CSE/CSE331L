@@ -5,14 +5,9 @@
     CONVERT DB 20H ;HEX TO DECIMAL
     
 .CODE
-    TRANSFER: 
+    TRANSFER_TO_DS: 
         MOV DX, @DATA
         MOV DS, DX 
-        
-    LOWER_FORM:
-        LEA DX, STRING
-        MOV AH, 9H
-        INT 21H
        
     FOR_W:   
         MOV AL, STRING[0] 
