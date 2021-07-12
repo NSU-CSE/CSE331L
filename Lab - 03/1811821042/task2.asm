@@ -2,12 +2,17 @@
 .STACK 100H
 .DATA
     STRING DB "world$"
-    CONVERT DB 20H
+    CONVERT DB 20H ;HEX TO DECIMAL
     
 .CODE
     TRANSFER: 
         MOV DX, @DATA
-        MOV DS, DX
+        MOV DS, DX 
+        
+    LOWER_FORM:
+        LEA DX, STRING
+        MOV AH, 9H
+        INT 21H
        
     FOR_W:   
         MOV AL, STRING[0] 

@@ -1,11 +1,9 @@
 .MODEL SMALL
 .STACK 100H
 .DATA
-    VAR1 DB ?
-    VAR2 DW ?
 
 .CODE
-    DATA_TRANSFER:
+    TRANSFER:
         MOV AX, @DATA
         MOV DS, AX
         
@@ -19,7 +17,7 @@
         INT 21H
         MOV BL, AL 
         
-    ADDITION:
+    SUBSTRACTION:
         SUB BH, BL  ;BH = BH - BL
         ADD BH, 30H ;ASCII TO DECIMAL
 
